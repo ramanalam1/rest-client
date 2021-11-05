@@ -1,0 +1,223 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="treeView.js"></script>
+<meta charset="utf-8">
+<title>Flexbox wrap 0 — children overflowing</title>
+<style>
+.form  label {
+	display: flex;
+	flex-direction: row;
+	text-align: right;
+	width: 400px;
+	line-height: 26px;
+	margin-bottom: 10px;
+}
+
+ input {
+	height: 20px;
+	flex: 0 0 200px;
+	margin-left: 10px;
+}
+
+.form label span {
+	margin-left: 10px;
+	font-family: "Times New Roman", Times, serif;
+	color: #BFBBBA
+	
+}
+
+ul, #myUL {
+	list-style-type: none;
+}
+
+#myUL {
+	left-margin: 5px;
+	padding: 0;
+}
+
+.caret {
+	cursor: pointer;
+	-webkit-user-select: none; /* Safari 3.1+ */
+	-moz-user-select: none; /* Firefox 2+ */
+	-ms-user-select: none; /* IE 10+ */
+	user-select: none;
+}
+
+.caret::before {
+	content: "\25B6";
+	color: black;
+	display: inline-block;
+	margin-right: 6px;
+}
+
+.caret-down::before {
+	-ms-transform: rotate(90deg); /* IE 9 */
+	-webkit-transform: rotate(90deg); /* Safari */ '
+	transform: rotate(90deg);
+}
+
+.nested {
+	display: none;
+}
+
+.active {
+	display: block;
+}
+
+html {
+	font-family: sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+header {
+	background: purple;
+	height: 50px;
+}
+
+h1 {
+	text-align: center;
+	color: white;
+	margin: 0;
+}
+
+article {
+	padding: 10px;
+	background: aqua;
+}
+
+/* Add your flexbox CSS below here */
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: scroll;
+	white-space: nowrap;
+}
+
+.http {
+	background: pink;
+	padding:5px;
+}
+
+.http .url span {
+   
+	
+	margin-left:5px;
+
+
+}
+
+.middle {
+	flex: 7;
+	background: green;
+	display: flex;
+	overflow: scroll;
+}
+
+.request {
+	flex: 2;
+	background: purple;
+	display: flex;
+	flex-direction: column;
+}
+
+.form {
+	flex: 4;
+	background: white;
+	overflow: scroll;
+	clear: none;
+}
+
+.response {
+	flex: 2;
+	background: LightBlue;
+}
+
+.output {
+	flex: 3;
+	background: blue;
+	display: flex;
+	overflow-x: scroll;
+	flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.inputpayload {
+	flex: 1;
+	overflow-y: scroll;
+	overflow-x: scroll;
+	font-size: 18px;
+}
+</style>
+</head>
+<body onload="load()">
+	<header>
+		<h1>HTTP Client</h1>
+	</header>
+
+<div class="http">
+    	<div class="url" >
+        <span>
+    	<button onclick="sendRequest()" style="border: 2px solid #4CAF50;">Send</button></span>
+		<span><label for="method">Method <select name="method" id="httpMethod">
+				<option value="POST">POST</option>
+				<option value="GET">GET</option>
+				<option value="PUT">PUT</option>
+				<option value="DELETE">DELETE</option>
+		</select>
+		</label></span>
+        <span><label for="endpoint">URL <input name="endpoint" value="http://localhost:8081/test" size="50" id="endpoint">
+		</label><span> 
+		</div>
+		
+
+	</div>
+	<div class="container">
+
+		<div class="middle">
+			<div class="request">
+				<textarea class="inputpayload" id="payload" onkeypress="ctrlA()">[
+  [
+    1,
+    2,
+    3,
+    4
+  ],{"simple1": null,
+     "simpleeeeeeeeeeee2":"value2"},
+				{
+				
+  "abc": "asdf",
+  "o2": {
+    "boolean": false,
+    "o3": {
+      "o4": {
+        "two": 2
+      },
+      "o5": [
+        "2","3","4",true
+      ]
+    }
+  }
+}]</textarea>
+
+				<button onclick="load()" style="border: 2px solid #4CAF50;">Refresh</button>
+			</div>
+			<div class="form" id="my-form" onclick="switchBorder(event);"
+				onchange="editInput(event);">form</div>
+			<div class="response"
+				style="border: 2px solid #4CAF50; display: flex;">
+				<textarea class="inputpayload" id="responsepayload"
+					onkeypress="ctrlA()">
+		</textarea>
+			</div>
+		</div>
+		<div class="output" id="footer"></div>
+
+	</div>
+
+</body>
+</html>
